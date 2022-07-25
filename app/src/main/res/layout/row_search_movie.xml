@@ -7,7 +7,7 @@
 
         <variable
             name="movie"
-            type="com.paging.domain.model.Movie" />
+            type="com.paging.domain.model.Post" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

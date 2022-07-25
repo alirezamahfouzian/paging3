@@ -1,7 +1,7 @@
 package com.paging.data.remote.dto
 
-import com.paging.domain.model.Movie
 import com.google.gson.annotations.SerializedName
+import com.paging.domain.model.Post
 
 data class VideoEntity(
     @SerializedName("age_restriction")
@@ -37,8 +37,8 @@ data class VideoEntity(
     val year: Int? = null
 )
 
-fun VideoEntity.toMovie(): Movie {
-    return Movie(
+fun VideoEntity.toMovie(): Post {
+    return Post(
         title = this.title,
         posterImagePath = this.posterImage?.path,
         year = this.year

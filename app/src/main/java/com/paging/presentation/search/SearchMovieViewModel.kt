@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import com.paging.domain.model.Movie
+import com.paging.domain.model.Post
 import com.paging.domain.use_case.SearchMoviesUseCase
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
@@ -21,8 +21,8 @@ class SearchMovieViewModel @Inject constructor(
     private val searchMoviesUseCase: SearchMoviesUseCase
 ) : ViewModel() {
 
-    private val _searchQueryResult = MutableStateFlow<List<Movie?>?>(emptyList())
-    val searchQueryResult: StateFlow<List<Movie?>?> = _searchQueryResult
+    private val _movieList = MutableLiveData<List<Post?>?>()
+    val movieList: LiveData<List<Post?>?> = _movieList
 
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
@@ -52,7 +52,7 @@ class SearchMovieViewModel @Inject constructor(
                         _isLoading.postValue(true)
                     }
                     is com.paging.common.network.ApiResponse.Success -> {
-                        _searchQueryResult.value = it.data
+                        _movieList.postValue(it.data)
                         _isLoading.postValue(false)
                     }
                 }

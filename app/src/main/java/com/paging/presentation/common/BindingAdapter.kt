@@ -1,9 +1,11 @@
 package com.paging.presentation.common
 
-import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.paging.common.ui.BaseRecAdapter
 
 object BindingAdapter {
 
@@ -13,23 +15,19 @@ object BindingAdapter {
         imageView.load(imageUrl)
     }
 
-    @BindingAdapter("shouldShowOnLoading")
+    @BindingAdapter("submitList")
     @JvmStatic
-    fun shouldShowOnLoading(view: View, isLoading: Boolean) {
-        if (isLoading) {
-            view.visibility = View.VISIBLE
-        } else {
-            view.visibility = View.GONE
-        }
+    fun submitList(recyclerView: RecyclerView, list: List<Any>?) {
+        val adapter = recyclerView.adapter as BaseRecAdapter<ViewDataBinding, Any>?
+        adapter?.submitList(list ?: listOf())
     }
 
-    @BindingAdapter("shouldHideOnLoading")
+    @BindingAdapter("setAdapter")
     @JvmStatic
-    fun shouldHideOnLoading(view: View, isLoading: Boolean) {
-        if (isLoading) {
-            view.visibility = View.INVISIBLE
-        } else {
-            view.visibility = View.VISIBLE
-        }
+    fun setAdapter(
+        recyclerView: RecyclerView,
+        adapter: BaseRecAdapter<ViewDataBinding, Any>?
+    ) {
+        adapter?.let { recyclerView.adapter = it }
     }
 }
