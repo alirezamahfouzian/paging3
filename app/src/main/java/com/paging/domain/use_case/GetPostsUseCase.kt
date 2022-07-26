@@ -12,8 +12,8 @@ class GetPostsUseCase @Inject constructor(
     private val repository: PostsRepository
 ) {
 
-    suspend operator fun invoke(query: String): Flow<ApiResponse<List<Post?>>> =
-        genericFlowResponse(repository.getPosts(query)) { postsDto ->
+    suspend operator fun invoke(): Flow<ApiResponse<List<Post?>>> =
+        genericFlowResponse(repository.getPosts()) { postsDto ->
             postsDto?.data?.map { it?.toPost() }
         }
 }

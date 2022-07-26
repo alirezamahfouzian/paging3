@@ -5,5 +5,5 @@ import com.paging.data.remote.dto.PostsDto
 
 interface PostsRepository {
 
-    suspend fun getPosts(query: String): ApiResponse<PostsDto>
+    suspend fun getPosts(): ApiResponse<PostsDto>
 }

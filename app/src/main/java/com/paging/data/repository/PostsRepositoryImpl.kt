@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class PostsRepositoryImpl @Inject constructor(private val postsApi: PostsApi) : PostsRepository {
 
-    override suspend fun getPosts(query: String): ApiResponse<PostsDto> = safeApiCall {
-        postsApi.getPosts(query)
+    override suspend fun getPosts(): ApiResponse<PostsDto> = safeApiCall {
+        postsApi.getPosts()
     }
 }

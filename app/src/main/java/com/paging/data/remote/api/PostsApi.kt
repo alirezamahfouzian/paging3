@@ -11,6 +11,6 @@ interface PostsApi {
 
     @GET(POST_API_ENDPOINT)
     suspend fun getPosts(
-        @Query(POST_API_PARAM_PAGE) query: String
+        @Query(POST_API_PARAM_PAGE) page: Int = 0
     ): Response<PostsDto>
 }

@@ -24,11 +24,15 @@ class PostsViewModel @Inject constructor(
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
+    init {
+        getPosts()
+    }
+
     var postsApiJob: Job? = null
-    private fun getPosts(query: String) {
+    private fun getPosts() {
         postsApiJob?.cancel()
         postsApiJob = viewModelScope.launch(IO) {
-            getPostsUseCase(query).collect {
+            getPostsUseCase().collect {
                 when (it) {
                     is ApiResponse.Error -> {
                         _isLoading.postValue(false)
