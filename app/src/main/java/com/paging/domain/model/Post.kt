@@ -1,9 +1,13 @@
 package com.paging.domain.model
 
+import com.paging.data.remote.dto.PostOwnerDto
+
 
 data class Post(
-    val title: String? = null,
-    val posterImagePath: String? = null,
-    val year: Int? = null,
-    val country: Int? = null,
+    val id: String? = null,
+    val image: String? = null,
+    val likes: Int? = null,
+    val publishDate: String? = null,
+    val tags: List<String?>? = null,
+    val text: String? = null
 )

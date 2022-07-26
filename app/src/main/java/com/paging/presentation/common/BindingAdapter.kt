@@ -24,10 +24,7 @@ object BindingAdapter {
 
     @BindingAdapter("setAdapter")
     @JvmStatic
-    fun setAdapter(
-        recyclerView: RecyclerView,
-        adapter: BaseRecAdapter<ViewDataBinding, Any>?
-    ) {
+    fun setAdapter(recyclerView: RecyclerView, adapter: BaseRecAdapter<ViewDataBinding, Any>?) {
         adapter?.let { recyclerView.adapter = it }
     }
 }

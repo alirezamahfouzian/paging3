@@ -8,26 +8,26 @@ object ResponseHandler {
 
     suspend inline fun <T> safeApiCall(
         crossinline requestFunction: suspend () -> Response<T>
-    ): com.paging.common.network.ApiResponse<T> {
+    ): ApiResponse<T> {
         return try {
             val response = requestFunction()
-            com.paging.common.network.ApiResponse.create(response)
+            ApiResponse.create(response)
         } catch (e: Exception) {
-            com.paging.common.network.ApiResponse.create(e)
+            ApiResponse.create(e)
         }
     }
 
     fun <T, U> genericFlowResponse(
-        response: com.paging.common.network.ApiResponse<T>,
+        response: ApiResponse<T>,
         successFunction: (T?) -> U?
-    ): Flow<com.paging.common.network.ApiResponse<U>> = flow {
-        emit(com.paging.common.network.ApiResponse.Loading())
+    ): Flow<ApiResponse<U>> = flow {
+        emit(ApiResponse.Loading())
         when (response) {
-            is com.paging.common.network.ApiResponse.Error -> {
-                emit(com.paging.common.network.ApiResponse.Error(response.errorMessage))
+            is ApiResponse.Error -> {
+                emit(ApiResponse.Error(response.errorMessage))
             }
-            is com.paging.common.network.ApiResponse.Success -> {
-                emit(com.paging.common.network.ApiResponse.Success(successFunction(response.data)))
+            is ApiResponse.Success -> {
+                emit(ApiResponse.Success(successFunction(response.data)))
             }
         }
     }
